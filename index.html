@@ -22,24 +22,20 @@
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    background:
-      radial-gradient(circle at 82% 8%, rgba(245,166,35,.10), transparent 46%),
-      var(--bg);
+    background: radial-gradient(circle at 82% 8%, rgba(245,166,35,.10), transparent 46%), var(--bg);
     color: var(--text);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
     padding: 24px;
   }
-
   .intro-eyebrow{
-    font-family: 'Share Tech Mono', monospace;
+    font-family: monospace;
     font-size: 12.5px;
     letter-spacing: .14em;
     text-transform: uppercase;
     color: var(--amber);
     margin-bottom: 14px;
   }
-
   h1{
     font-size: clamp(20px, 3vw, 30px);
     max-width: 620px;
@@ -47,14 +43,12 @@
     margin: 0 0 8px;
   }
   h1 em{ font-style: normal; color: var(--amber); }
-
   .intro-sub{
     color: var(--text-dim);
     font-size: 14px;
     max-width: 480px;
     margin-bottom: 34px;
   }
-
   .open-btn {
     padding: 15px 30px;
     background-color: var(--amber);
@@ -71,8 +65,6 @@
     background-color: #ffb640;
     transform: translateY(-2px);
   }
-  .open-btn:active{ transform: translateY(0); }
-
   .modal {
     display: none;
     position: fixed;
@@ -82,7 +74,6 @@
     backdrop-filter: blur(2px);
   }
   .modal.show{ display: block; }
-
   .modal-content {
     position: relative;
     margin: 2vh auto;
@@ -95,7 +86,6 @@
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(0,0,0,0.6);
   }
-
   .close-btn {
     position: absolute;
     top: 12px;
@@ -116,7 +106,6 @@
     transition: background .15s, color .15s;
   }
   .close-btn:hover { color: #e85c4a; background: rgba(0,0,0,.55); }
-
   iframe {
     width: 100%;
     height: 100%;
@@ -146,7 +135,7 @@
     var btn = document.getElementById("openModalBtn");
     var closeBtn = document.getElementById("closeBtn");
     var frame = document.getElementById("dashFrame");
-    var DASH_SRC = "dashboard.html";
+    var DASH_SRC = "dash.html";
 
     function openModal(){
       if(!frame.src || frame.src.indexOf(DASH_SRC) === -1){
