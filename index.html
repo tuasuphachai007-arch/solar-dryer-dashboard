@@ -55,7 +55,6 @@
     margin-bottom: 34px;
   }
 
-  /* ปุ่มกดให้เปิด popup แดชบอร์ด */
   .open-btn {
     padding: 15px 30px;
     background-color: var(--amber);
@@ -74,7 +73,6 @@
   }
   .open-btn:active{ transform: translateY(0); }
 
-  /* พื้นหลังโปร่งแสงตอน popup เปิด */
   .modal {
     display: none;
     position: fixed;
@@ -139,16 +137,18 @@
   <div id="myModal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="closeBtn" title="ปิด">&times;</span>
-      <!-- ไฟล์นี้ต้องอยู่ในโฟลเดอร์เดียวกับ index.html -->
-<iframe id="dashFrame" src="dash.html" style="width:100%; height:100%; border:none;"></iframe>  <script>
+      <iframe id="dashFrame" src="dash.html" title="Solar-Biomass Dryer Dashboard"></iframe>
+    </div>
+  </div>
+
+  <script>
     var modal = document.getElementById("myModal");
     var btn = document.getElementById("openModalBtn");
     var closeBtn = document.getElementById("closeBtn");
     var frame = document.getElementById("dashFrame");
-    var DASH_SRC = "solar-biomass-dryer-dashboard.html";
+    var DASH_SRC = "dash.html";
 
     function openModal(){
-      // โหลดไฟล์ตอนเปิดจริง ๆ (ไม่ต้องโหลดล่วงหน้าตอนเปิดหน้าเว็บ)
       if(!frame.src || frame.src.indexOf(DASH_SRC) === -1){
         frame.src = DASH_SRC;
       }
