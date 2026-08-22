@@ -4,129 +4,277 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>โรงเรือนอบแห้งพลังงานแสงอาทิตย์ร่วมกับเชื้อเพลิงชีวมวล</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#12151a;
-    --panel:#1b2028;
-    --line:rgba(237,235,227,.09);
-    --line-2:rgba(237,235,227,.16);
-    --text:#edebe3;
-    --text-dim:#98a1ac;
-    --amber:#f5a623;
+    --bg:#181310;
+    --panel:#211a15;
+    --panel-2:#2a221b;
+    --line:rgba(244,232,214,.08);
+    --line-2:rgba(244,232,214,.18);
+    --text:#f3e9d7;
+    --text-dim:#a9998640;
+    --dim:#a6957e;
+    --sun:#f2a541;
+    --sun-soft:#f7c47a;
+    --ember:#cf5a3a;
+    --ember-soft:#e8825f;
+    --leaf:#8c9a5e;
+    --focus:#f2c07a;
   }
   *{box-sizing:border-box;}
+  html,body{height:100%;}
   body{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    background: radial-gradient(circle at 82% 8%, rgba(245,166,35,.10), transparent 46%), var(--bg);
-    color: var(--text);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    text-align: center;
-    padding: 24px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    margin:0;
+    background:
+      radial-gradient(ellipse 620px 420px at 84% 6%, rgba(242,165,65,.16), transparent 60%),
+      radial-gradient(ellipse 520px 380px at 10% 96%, rgba(207,90,58,.12), transparent 62%),
+      var(--bg);
+    color:var(--text);
+    font-family:'Sarabun','Segoe UI',Tahoma,sans-serif;
+    text-align:center;
+    padding:28px;
+    position:relative;
+    overflow-x:hidden;
   }
-  .intro-eyebrow{
-    font-family: monospace;
-    font-size: 12.5px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--amber);
-    margin-bottom: 14px;
+  /* faint grain / noise texture for warmth, purely decorative */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:radial-gradient(rgba(244,232,214,.035) 1px, transparent 1px);
+    background-size:3px 3px;
+    pointer-events:none;
+    opacity:.5;
   }
+
+  .stage{
+    position:relative;
+    max-width:640px;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--sun-soft);
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before,
+  .eyebrow::after{
+    content:"";
+    height:1px;
+    width:26px;
+    background:linear-gradient(90deg, transparent, var(--line-2));
+  }
+  .eyebrow::after{ background:linear-gradient(90deg, var(--line-2), transparent); }
+
   h1{
-    font-size: clamp(20px, 3vw, 30px);
-    max-width: 620px;
-    line-height: 1.4;
-    margin: 0 0 8px;
+    font-weight:700;
+    font-size:clamp(21px, 3.4vw, 31px);
+    max-width:600px;
+    line-height:1.55;
+    margin:0 0 12px;
+    letter-spacing:.01em;
   }
-  h1 em{ font-style: normal; color: var(--amber); }
-  .intro-sub{
-    color: var(--text-dim);
-    font-size: 14px;
-    max-width: 480px;
-    margin-bottom: 34px;
+  h1 .hl-sun{ color:var(--sun); }
+  h1 .hl-ember{ color:var(--ember-soft); }
+
+  .sub{
+    color:var(--dim);
+    font-size:14.5px;
+    max-width:460px;
+    line-height:1.7;
+    margin-bottom:38px;
   }
-  .open-btn {
-    padding: 15px 30px;
-    background-color: var(--amber);
-    color: #1a1406;
-    border: none;
-    border-radius: 8px;
-    font-size: 17px;
-    cursor: pointer;
-    font-weight: 700;
-    box-shadow: 0 4px 14px rgba(245,166,35,.25);
-    transition: 0.2s;
+
+  /* signature: dual energy source converging into one flow */
+  .dual-source{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    margin-bottom:40px;
+    width:100%;
+    max-width:360px;
   }
-  .open-btn:hover {
-    background-color: #ffb640;
-    transform: translateY(-2px);
+  .source-icon{
+    width:38px; height:38px;
+    flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
   }
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.82);
-    backdrop-filter: blur(2px);
+  .source-icon svg{ width:100%; height:100%; overflow:visible; }
+  .icon-sun circle{ fill:none; stroke:var(--sun); stroke-width:2; }
+  .icon-sun line{ stroke:var(--sun); stroke-width:2; stroke-linecap:round; }
+  .icon-flame path{ fill:none; stroke:var(--ember-soft); stroke-width:2; stroke-linejoin:round; stroke-linecap:round; }
+
+  .flow-track{
+    position:relative;
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg, var(--sun) 0%, var(--line-2) 50%, var(--ember-soft) 100%);
+    opacity:.55;
   }
-  .modal.show{ display: block; }
-  .modal-content {
-    position: relative;
-    margin: 2vh auto;
-    width: 96%;
-    max-width: 1280px;
-    height: 96vh;
-    background-color: var(--panel);
-    border: 1px solid var(--line-2);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  .flow-dot{
+    position:absolute;
+    top:50%; left:0;
+    width:5px; height:5px;
+    border-radius:50%;
+    background:var(--sun-soft);
+    box-shadow:0 0 8px 2px rgba(242,165,65,.55);
+    transform:translate(-50%,-50%);
+    animation:travel 3.6s ease-in-out infinite;
   }
-  .close-btn {
-    position: absolute;
-    top: 12px;
-    right: 18px;
-    color: #fff;
-    font-size: 32px;
-    line-height: 1;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 1001;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: rgba(0,0,0,.35);
-    transition: background .15s, color .15s;
+  @keyframes travel{
+    0%{ left:0%; background:var(--sun-soft); box-shadow:0 0 8px 2px rgba(242,165,65,.55); }
+    48%{ background:var(--focus); }
+    100%{ left:100%; background:var(--ember-soft); box-shadow:0 0 8px 2px rgba(207,90,58,.55); }
   }
-  .close-btn:hover { color: #e85c4a; background: rgba(0,0,0,.55); }
-  iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    display: block;
-    background: #12151a;
+
+  .open-btn{
+    padding:16px 34px;
+    background:linear-gradient(120deg, var(--sun) 0%, var(--ember) 100%);
+    color:#1c130a;
+    border:none;
+    border-radius:9px;
+    font-family:inherit;
+    font-size:16.5px;
+    font-weight:700;
+    letter-spacing:.01em;
+    cursor:pointer;
+    box-shadow:0 10px 26px -8px rgba(207,90,58,.45);
+    transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
+  }
+  .open-btn:hover{ transform:translateY(-2px); filter:brightness(1.06); box-shadow:0 14px 30px -8px rgba(207,90,58,.55); }
+  .open-btn:active{ transform:translateY(0); }
+  .open-btn:focus-visible{ outline:2px solid var(--focus); outline-offset:3px; }
+
+  .hint{
+    margin-top:16px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:.06em;
+    color:var(--dim);
+    opacity:.75;
+  }
+
+  /* modal */
+  .modal{
+    display:none;
+    position:fixed;
+    z-index:1000;
+    inset:0;
+    background:rgba(10,7,5,.86);
+    backdrop-filter:blur(3px);
+  }
+  .modal.show{ display:block; }
+  .modal-content{
+    position:relative;
+    margin:2vh auto;
+    width:96%;
+    max-width:1280px;
+    height:96vh;
+    background:var(--panel);
+    border:1px solid var(--line-2);
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 24px 70px rgba(0,0,0,.65);
+  }
+  .modal-content::before{
+    content:"";
+    position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg, var(--sun), var(--ember));
+    z-index:2;
+  }
+  .close-btn{
+    position:absolute;
+    top:14px; right:18px;
+    color:var(--text);
+    font-size:28px;
+    line-height:1;
+    font-weight:600;
+    cursor:pointer;
+    z-index:1001;
+    width:38px; height:38px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:50%;
+    background:rgba(0,0,0,.4);
+    border:1px solid var(--line-2);
+    transition:background .15s, color .15s, transform .15s;
+  }
+  .close-btn:hover{ color:var(--ember-soft); background:rgba(0,0,0,.6); transform:scale(1.06); }
+  .close-btn:focus-visible{ outline:2px solid var(--focus); outline-offset:2px; }
+  iframe{
+    width:100%;
+    height:100%;
+    border:none;
+    display:block;
+    background:var(--bg);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .flow-dot{ animation:none; left:50%; }
+  }
+
+  @media (max-width:480px){
+    .dual-source{ max-width:280px; gap:10px; }
+    .source-icon{ width:30px; height:30px; }
   }
 </style>
 </head>
 <body>
 
-  <div class="intro-eyebrow">Solar–Biomass Dryer · Monitoring System</div>
-  <h1>โรงเรือนอบแห้งพลังงาน<em>แสงอาทิตย์</em>ร่วมกับเชื้อเพลิงชีวมวล</h1>
-  <p class="intro-sub">คลิกปุ่มด้านล่างเพื่อเปิดแดชบอร์ดตรวจวัดข้อมูลเซนเซอร์แบบเรียลไทม์ในหน้าต่างป๊อปอัป</p>
+  <div class="stage">
+    <div class="eyebrow">Solar–Biomass Dryer · Monitoring</div>
 
-  <button id="openModalBtn" class="open-btn">เปิดแดชบอร์ดเตาอบชีวมวล</button>
+    <h1>โรงเรือนอบแห้งพลังงาน<span class="hl-sun">แสงอาทิตย์</span>ร่วมกับเชื้อเพลิง<span class="hl-ember">ชีวมวล</span></h1>
+
+    <p class="sub">เปิดแดชบอร์ดเพื่อติดตามค่าจากเซนเซอร์ของระบบอบแห้งทั้งสองแหล่งพลังงานในหน้าต่างเดียว</p>
+
+    <div class="dual-source" aria-hidden="true">
+      <div class="source-icon icon-sun">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1.5" x2="12" y2="4.5"/>
+          <line x1="12" y1="19.5" x2="12" y2="22.5"/>
+          <line x1="1.5" y1="12" x2="4.5" y2="12"/>
+          <line x1="19.5" y1="12" x2="22.5" y2="12"/>
+          <line x1="4.5" y1="4.5" x2="6.6" y2="6.6"/>
+          <line x1="17.4" y1="17.4" x2="19.5" y2="19.5"/>
+          <line x1="4.5" y1="19.5" x2="6.6" y2="17.4"/>
+          <line x1="17.4" y1="6.6" x2="19.5" y2="4.5"/>
+        </svg>
+      </div>
+      <div class="flow-track"><span class="flow-dot"></span></div>
+      <div class="source-icon icon-flame">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2c1 3-2.5 4-2.5 7.2 0 1.6 1.1 2.8 2.5 2.8s2.5-1.2 2.5-2.8c1.5 1.4 2.5 3.3 2.5 5.3 0 3.5-2.5 6-5 6s-6-2.2-6-6.2C6 10 8 6 12 2z"/>
+        </svg>
+      </div>
+    </div>
+
+    <button id="openModalBtn" class="open-btn">เปิดแดชบอร์ดเตาอบชีวมวล</button>
+    <div class="hint">ข้อมูลเซนเซอร์แบบเรียลไทม์</div>
+  </div>
 
   <div id="myModal" class="modal">
     <div class="modal-content">
-      <span class="close-btn" id="closeBtn" title="ปิด">&times;</span>
-      <iframe id="dashFrame" src="dash.html" title="Solar-Biomass Dryer Dashboard"></iframe>
+      <span class="close-btn" id="closeBtn" title="ปิด" role="button" tabindex="0" aria-label="ปิดหน้าต่าง">&times;</span>
+      <iframe id="dashFrame" src="" title="Solar-Biomass Dryer Dashboard"></iframe>
     </div>
   </div>
 
@@ -151,6 +299,9 @@
 
     btn.addEventListener("click", openModal);
     closeBtn.addEventListener("click", closeModal);
+    closeBtn.addEventListener("keydown", function(e){
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); closeModal(); }
+    });
     modal.addEventListener("click", function(e){
       if (e.target === modal) closeModal();
     });
